@@ -7,14 +7,8 @@ using UnityEngine.SceneManagement;
 public class LevelManager : MonoBehaviour {
 
 	//this method allows flow among scenes 
-	public void Loading(string name){
-		
-			SceneManager.LoadScene (name);
-			print ("Scene Loaded");
-
+	public void LoadScene(string name){	
+		SceneManager.LoadScene (name);
 
 	}
-
-
-
 }

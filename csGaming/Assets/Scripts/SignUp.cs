@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
-using System.Text.RegularExpressions;
 using UnityEngine.SceneManagement;
 
 public class SignUp : MonoBehaviour {
@@ -25,42 +24,6 @@ public class SignUp : MonoBehaviour {
 	private string age;
 	private string password;
 	private string confPass;
-
-
-
-	private bool EmailValid = false;
-
-
-
-	// Use this for initialization
-	void Start () {
-
-	}
-
-
-	/*method used with the same puspuse but for the clicling action */
-
-	public void Loading(string name){
-
-		if (name != "" && nickname != "" && email != "" && major != "" && gender != "" && age != "" 
-			     && password != "" && confPass != "") { 
-
-			if ((email.Contains ("@")) == true) {
-				SceneManager.LoadScene (name);
-				print ("Scene Loaded");
-				EmailValid = true;
-
-			} else {
-				print ("Invalid Email. Missing @");
-			}
-		} else {
-			print ("Missing Fields");
-		}
-
-	}
-
-
-
 
 
 	void Update () {
@@ -100,29 +63,19 @@ public class SignUp : MonoBehaviour {
 		confPass = ConfPass.GetComponent<InputField> ().text;
 
 
-		if(Input.GetKeyDown(KeyCode.Return)){ 
+		if(Input.GetKeyDown(KeyCode.Return) || Input.GetMouseButtonDown(0)){ 
 			//if all fileds are filled
-			if (name != "" && nickname != "" && email != "" && major != "" 
-				&& gender != "" && age != "" && password != "" && confPass != "") { 
+			bool isNameValid = Validation.validateName(name);
+			bool isEmailValid = Validation.validateEmail(email);
+			bool isPasswordValid = Validation.validatePassword(password);
+			bool isPasswordConf = Validation.confirmPassword(password, confPass);
 
-				//valid email form
-				if ((email.Contains ("@")) == true) {
-					SceneManager.LoadScene ("Level_01");
-					print ("Scene Loaded");
-					EmailValid = true;
-
-				} else {
-					print ("Invalid Email. Missing @");
-				}
-
-		      } else {
-				print ("Missing Fields");
+			if (isNameValid && isEmailValid && isPasswordValid && isPasswordConf) {
+				RegisterPlayer.RegisterPlayerBttn(nickname, password, "Level_01");
 			}
+			else
+				print("invalid player");
 		}
-
-
-
 	}
-
 }
 
