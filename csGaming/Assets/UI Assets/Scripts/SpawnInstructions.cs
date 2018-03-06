@@ -15,8 +15,10 @@ public class SpawnInstructions : MonoBehaviour {
 
 	void Start()
 	{
-		Button moveRightButton = moveRight.GetComponent<Button>();
-		moveRightButton.onClick.AddListener(MoveRight);
+		Debug.Log ("You have started");
+
+		//Button moveRightButton = moveRight.GetComponent<Button>();
+		moveRight.onClick.AddListener(MoveRight);
 
 		Button moveLeftButton = moveLeft.GetComponent<Button>();
 		moveLeftButton.onClick.AddListener(MoveLeft);
@@ -34,6 +36,7 @@ public class SpawnInstructions : MonoBehaviour {
 			buttons [i].gameObject.SetActive (false);
 			i++;
 		}
+			
 
 	}
 
@@ -42,8 +45,9 @@ public class SpawnInstructions : MonoBehaviour {
 		
 	}
 
-	public void MoveRight()
+	 void MoveRight()
 	{
+		Debug.Log ("You have clicked the move right button");
 		int i = 0;
 		while (i < buttons.Length) 
 		{
@@ -54,6 +58,7 @@ public class SpawnInstructions : MonoBehaviour {
 				break;
 			}
 				i++;
+			Debug.Log ("You have clicked the move right button");
 		}
 
 

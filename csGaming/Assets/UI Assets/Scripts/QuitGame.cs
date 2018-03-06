@@ -9,6 +9,7 @@ public class QuitGame : MonoBehaviour
     GameObject[] pauseObjects;
     public Button resumePlay;
     public Button quit;
+	public Button pauseButton;
 
     // Use this for initialization
     void Start()
@@ -19,27 +20,16 @@ public class QuitGame : MonoBehaviour
 
         Button resumeBtn = resumePlay.GetComponent<Button>();
         Button quitBtn = quit.GetComponent<Button>();
+		Button pause = pauseButton.GetComponent<Button> ();
 
         resumeBtn.onClick.AddListener(ResumeOnClick);
         quitBtn.onClick.AddListener(QuitOnClick);
+		pause.onClick.AddListener (pauseMenu);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Escape))
-        {
-            if(Time.timeScale == 1f)
-            {
-                Time.timeScale = 0f;
-                showPaused();
-            }
-            else if(Time.timeScale == 0f)
-            {
-                Time.timeScale = 1;
-                hidePaused();
-            }
-        }
     }
 
     public void pauseControl()
@@ -85,4 +75,21 @@ public class QuitGame : MonoBehaviour
     {
         Application.Quit();
     }
+
+
+	void pauseMenu()
+	{
+		showPaused();
+
+		 if(Time.timeScale == 1f)
+			{
+				Time.timeScale = 0f;
+				showPaused();
+			}
+			else if(Time.timeScale == 0f)
+			{
+				Time.timeScale = 1;
+				hidePaused();
+			}
+		}
 }
