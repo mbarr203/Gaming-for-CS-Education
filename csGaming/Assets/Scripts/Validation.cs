@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Text.RegularExpressions;
+using System;
 
 public class Validation : MonoBehaviour {
 	private const string MatchEmailPattern =
@@ -42,5 +43,21 @@ public class Validation : MonoBehaviour {
 	public static bool confirmPassword(string password, string confPassword) {
 		return password.Equals(confPassword);
  	}
+
+	public static bool validateAge(string age){
+		int val = 0;
+		//Int32.TryParse (age, out val);
+
+		if ((Int32.TryParse (age, out val)) && val > 10 && val < 60) {
+
+			print ("The age is: " + val + " And is alright");
+			return true;
+
+		} else {
+			return false;
+		}
+
+	}
+
 
 }

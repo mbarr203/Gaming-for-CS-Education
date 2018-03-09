@@ -16,35 +16,83 @@ public class Login : MonoBehaviour {
 	private string nickname;
 	private string password;
 
-	private string from;
+	public Text assk1;
+	public Text assk2;
 
 
+	/* checks length for password */
+
+	private bool passwordCorrectLength(){
+
+		if (password != "") {
+			if (password.Length >= 8 && password.Length <= 15) {
+				return true;
+			}
+		}
+		return false;
+
+	}
+
+	/* checks if password contains at least one number */
+
+	private bool passwordContainsNumber(){
 
 
-	void Start () {
+		if (password != "") {
+
+			for(int i = 0 ; i < password.Length; i++) {
+				int val ;
+				if (Int32.TryParse (Convert.ToString(password[i]), out val) == true ) {
+
+					return true;
+				}
+			}
+		} 
+		return false;
 
 	}
 
 
-	/*method used with the same puspuse but for the clicling action */
+
+	/*method used to load the scene */
 
 	public void Loading(string name){
 
-		if ( nickname != ""  && password != "" ) { //add functuonality to email
+		if (nickname != "" && passwordContainsNumber() && passwordCorrectLength() ) { 
 
 			SceneManager.LoadScene (name);
 			print ("Scene Loaded");
-		} else {
-			print ("Missing Fields");
+
+		} 
+		else {
+			print ("Not Scene Loaded");
+
+			if (! passwordContainsNumber() || !passwordCorrectLength()) {  
+				print ("Incorret Password");
+				assk2.text = "x";
+				assk2.color = Color.red;
+			} else {
+
+				assk2.text = " ";
+			}
+
+			if (nickname == "") {
+				print ("Missing Nickname");
+				assk1.text = "x";
+				assk1.color = Color.red;
+			} else {
+				assk1.text = " ";
+
+			}
 		}
 
 	}
 
-		
+
 
 	void Update () {
 
-		 /*allows users to press <tab> to change field*/
+		/*allows users to press <tab> to change field*/
 
 		if(Input.GetKeyDown(KeyCode.Tab)){
 			if (Nickname.GetComponent<InputField> ().isFocused) {
@@ -52,21 +100,16 @@ public class Login : MonoBehaviour {
 			}
 		}
 
-         /*filling string variabls with game objects*/
+		/*filling string variabls with game objects*/
 
 		nickname = Nickname.GetComponent<InputField> ().text;
 		password = Password.GetComponent<InputField> ().text;
 
-	   /*loads next scene by pressing <Return>*/
+		/*loads next scene by pressing <Return>*/
 
-		if(Input.GetKeyDown(KeyCode.Return)){ 
-			//if all fields full
-			if ( nickname != ""  && password != "" ) { 
-				SceneManager.LoadScene ("Level_01");
-				print ("Scene Loaded");
-			} else {
-				print ("Missing Fields");
-			}
+		if( Input.GetKeyDown(KeyCode.Return) ) { 
+
+			Loading ("Level_01");
 		}
 
 
