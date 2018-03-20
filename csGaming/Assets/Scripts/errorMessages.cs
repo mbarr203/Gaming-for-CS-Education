@@ -14,7 +14,7 @@ public class errorMessages : MonoBehaviour {
 			text.text = "Invalid username. No whitespaces allowed";
 			text.color = Color.red;
 		} else
-			text.text = "";
+			text.text = " ";
 
 	}
 
