@@ -12,7 +12,19 @@ public class Validation : MonoBehaviour {
             + @"([a-zA-Z]+[\w-]+\.)+[a-zA-Z]{2,4})$";
 
 	private const string MatchNamePattern = @"^([ \u00c0-\u01ffa-zA-Z'\-])+$";
-	private const string MatchPasswordPattern = @"^([a-zA-Z0-9@*#]{8,15})$"; // password must be between 8 and 15 characters and contain a numeric value
+
+	// password must be between 8 and 15 characters and contain a numeric value
+	private const string MatchPasswordPattern = @"^([a-zA-Z0-9@*#]{8,15})$";
+
+	private const string MatchUsernamePattern = @"^(\w+\S+)$";
+
+
+	public static bool validateUsername(string username) {
+		if (username != "")
+			return Regex.IsMatch(username, MatchUsernamePattern);
+
+		return false;
+	}
 
 
 	public static bool validateEmail(string email) {
@@ -26,7 +38,6 @@ public class Validation : MonoBehaviour {
 	public static bool validateName(string name) {
 		if (name != "")
 		{
-			print (Regex.IsMatch(name, MatchNamePattern));
 			return Regex.IsMatch(name, MatchNamePattern);
 		}
 		return false;
@@ -48,14 +59,10 @@ public class Validation : MonoBehaviour {
 		int val = 0;
 		//Int32.TryParse (age, out val);
 
-		if ((Int32.TryParse (age, out val)) && val > 10 && val < 60) {
-
-			print ("The age is: " + val + " And is alright");
+		if ((Int32.TryParse (age, out val)) && val > 10 && val < 60)
 			return true;
 
-		} else {
-			return false;
-		}
+		return false;
 
 	}
 
