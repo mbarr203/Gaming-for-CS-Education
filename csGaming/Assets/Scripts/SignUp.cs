@@ -105,6 +105,7 @@ public class SignUp : MonoBehaviour {
 	};
 
 	//Error messages objects
+	public Text usernameError;
 	public Text firstnameError;
 	public Text lastnameError;       //lastnameError object
 	public Text passError; 
@@ -136,7 +137,7 @@ public class SignUp : MonoBehaviour {
 	public void genderOptions(int i){
 
 		selectedGender = genderList[i];
-		print ("Option selected : " + selectedGender);
+
 		if (selectedGender != genderList [0]) {
 			isGenderValid = true;
 		} else {
@@ -148,7 +149,7 @@ public class SignUp : MonoBehaviour {
 	public void schoolYearOptions(int i){
 
 		selectedSchoolyear = schoolYearList[i];
-		print ("Option selected : " + selectedSchoolyear);
+
 		if (selectedSchoolyear != schoolYearList [0]) {
 			isSchoolYearValid = true;
 		} else {
@@ -159,7 +160,7 @@ public class SignUp : MonoBehaviour {
 	public void majorOptions(int i){
 
 		selectedMajor = majorList[i];
-		print ("Option selected : " + selectedMajor);
+
 		if (selectedMajor != majorList [0]) {
 			isMajorValid = true;
 		} else {
@@ -170,7 +171,7 @@ public class SignUp : MonoBehaviour {
 	public void schoolOptions(int i){
 
 		selectedSchool = schoolList[i];
-		print ("Option selected : " + selectedSchool);
+
 		if (selectedSchool != schoolList [0]) {
 			isSchoolValid = true;
 		} else {
@@ -183,76 +184,36 @@ public class SignUp : MonoBehaviour {
 
 	public void LoadingScene(){
 
+		bool isUsernameValid = Validation.validateUsername (nickname);
 		bool isNameValid = Validation.validateName(firstname);
 		bool isEmailValid = Validation.validateEmail(email);
 		bool isPasswordValid = Validation.validatePassword(password);
 		bool isPasswordConf = Validation.confirmPassword(password, confPass);
-		bool isAgeValid = Validation.validateAge (age);
-		/*bool isLastnameValid = Validation.validateLastname(lastname);*/
+		bool isAgeValid = Validation.validateAge(age);
 
-		if (isNameValid && isEmailValid && isPasswordValid && isPasswordConf && isGenderValid 
+		if (isUsernameValid && isNameValid && isEmailValid && isPasswordValid && isPasswordConf && isGenderValid 
 			&& isSchoolYearValid && isMajorValid  && isSchoolValid /* && isLastnameValid */ ) {
 
-			RegisterPlayer.RegisterPlayerBttn (nickname, password, "Level_01");
+			RegisterPlayer.RegisterPlayerBttn (nickname, password, "Level_01", email, firstname,
+											   lastname, Int32.Parse(age), selectedGender,
+											   selectedSchool, selectedMajor, selectedSchoolyear);
 
 		}else {
+
 			print ("invalid player");
 
 			//***just missing the validation for last name***
 
-			if (!isNameValid) {
-				errorMessages.nameError (firstnameError, isNameValid);
-			} else {
-				errorMessages.nameError (firstnameError , isNameValid);
-			}
-
-			if (!isEmailValid) {
-				errorMessages.emailError (emError, isEmailValid);
-			} else {
-				errorMessages.emailError (emError, isEmailValid);
-			}
-
-			if (!isPasswordValid) {
-				errorMessages.passwordError (passError, isPasswordValid);
-			} else {
-				errorMessages.passwordError (passError, isPasswordValid);
-			}
-
-			if (!isPasswordConf) {
-				errorMessages.confPasswordError (confPassError, isPasswordConf);
-			} else {
-				errorMessages.confPasswordError (confPassError, isPasswordConf);
-			}
-
-			if (!isAgeValid) {
-				errorMessages.AgeError (ageError, isAgeValid);
-			} else {
-				errorMessages.AgeError (ageError, isAgeValid);
-			}
-
-			if (!isGenderValid) {                         // first option (nothing selected)
-				errorMessages.GenderError (genderError, isGenderValid);
-			}else{
-				errorMessages.GenderError (genderError, isGenderValid);
-			}
-
-			if (!isMajorValid) {                         // first option (nothing selected)
-				errorMessages.MajorError (majorError, isMajorValid);
-			}else{
-				errorMessages.MajorError (majorError, isMajorValid);
-			}
-
-			if (!isSchoolValid) {                         // first option (nothing selected)
-				errorMessages.SchoolError (schoolError, isSchoolValid);
-			}else{
-				errorMessages.SchoolError (schoolError, isSchoolValid);
-			}
-
-			if (!isSchoolYearValid) {                         // first option (nothing selected)
-				errorMessages.SchoolYearError (schoolYearError, isSchoolYearValid);
-			}else{
-				errorMessages.SchoolYearError (schoolYearError, isSchoolYearValid);
-			} 
+			errorMessages.usernameError (usernameError, isUsernameValid);
+			errorMessages.nameError (firstnameError, isNameValid);
+			errorMessages.emailError (emError, isEmailValid);
+			errorMessages.passwordError (passError, isPasswordValid);
+			errorMessages.confPasswordError (confPassError, isPasswordConf);
+			errorMessages.AgeError (ageError, isAgeValid);
+			errorMessages.GenderError (genderError, isGenderValid);
+			errorMessages.MajorError (majorError, isMajorValid);
+			errorMessages.SchoolError (schoolError, isSchoolValid);
+			errorMessages.SchoolYearError (schoolYearError, isSchoolYearValid);
 
 			/* if (!isLastnameValid) {                        
 				errorMessages.lastNameError (lastnameError, isLastnameValid);
@@ -307,7 +268,7 @@ public class SignUp : MonoBehaviour {
 
 		if(Input.GetKeyDown(KeyCode.Return) ){ 
 
-			LoadingScene ();
+			LoadingScene();
 		}
 	}
 

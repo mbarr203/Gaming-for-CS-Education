@@ -9,6 +9,15 @@ using UnityEngine.SceneManagement;
 
 public class errorMessages : MonoBehaviour {
 
+	public static void usernameError(Text text, bool valid) {
+		if (!valid) {
+			text.text = "Invalid username. No whitespaces allowed";
+			text.color = Color.red;
+		} else
+			text.text = "";
+
+	}
+
 
 	public static void nameError(Text text, bool valid){
 
