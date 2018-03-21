@@ -22,7 +22,7 @@ public class errorMessages : MonoBehaviour {
 	public static void nameError(Text text, bool valid){
 
 		if (!valid) {
-			text.text = "Invalid name";
+			text.text = "Invalid name format";
 			text.color = Color.red; 
 		} else {
 			text.text = " ";
@@ -53,8 +53,8 @@ public class errorMessages : MonoBehaviour {
 	public static void passwordError(Text text, bool valid){
 
 		if (!valid) {
-			text.text = "Password: 8-15 long." +
-				"At least 1 number "; 
+			text.text = "Password: 8-15 characters long.\n" +
+				"Must have at least 1 number "; 
 			text.color = Color.red; 
 		} else {
 			text.text = " ";
