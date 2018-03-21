@@ -118,6 +118,12 @@ public class SignUp : MonoBehaviour {
 	public Text schoolYearError;
 
 
+	/*Confirmation Form Fields*/
+	public Text succefullReg;
+	public GameObject start;
+	public GameObject goBack;
+	public GameObject panel;
+
 	void Start(){
 
 		/*initilizing each dropdown with lists */
@@ -127,7 +133,11 @@ public class SignUp : MonoBehaviour {
 		Major.AddOptions (majorList);
 		School.AddOptions (schoolList);
 
+		/*registration confirmation fields inactive when scene displays*/
 
+		panel.SetActive (false);
+		start.SetActive (false);
+		goBack.SetActive (false);
 	}
 
 
@@ -179,10 +189,29 @@ public class SignUp : MonoBehaviour {
 		}
 	}
 
+	/* Handling Start Button of the Registration Confirmation form */
+
+	public void RegisterUser (){  
+
+		SceneManager.LoadScene("Level_01");
+
+	}
+
+	/* Handling GoBacktoMainMenu Button of the Registration Confirmation form */
+
+	public void GoBackMainMenu (){  
+
+		SceneManager.LoadScene("WelcomeForm");
+
+	}
+
+
 	/*   Loading next scene  for a valid player. 
 	 * Is used by "Create account" object in the scene*/
 
 	public void LoadingScene(){
+		
+
 
 		bool isUsernameValid = Validation.validateUsername (nickname);
 		bool isNameValid = Validation.validateName(firstname);
@@ -191,14 +220,17 @@ public class SignUp : MonoBehaviour {
 		bool isPasswordConf = Validation.confirmPassword(password, confPass);
 		bool isAgeValid = Validation.validateAge(age);
 
-		if (isUsernameValid && isNameValid && isEmailValid && isPasswordValid && isPasswordConf && isGenderValid 
-			&& isSchoolYearValid && isMajorValid  && isSchoolValid /* && isLastnameValid */ ) {
+		if (isUsernameValid && isNameValid && isEmailValid && isPasswordValid && isPasswordConf && isGenderValid
+		    && isSchoolYearValid && isMajorValid && isSchoolValid /* && isLastnameValid */) {
 
 			RegisterPlayer.RegisterPlayerBttn (nickname, password, "Level_01", email, firstname,
-											   lastname, Int32.Parse(age), selectedGender,
-											   selectedSchool, selectedMajor, selectedSchoolyear);
+				lastname, Int32.Parse(age), selectedGender,
+				selectedSchool, selectedMajor, selectedSchoolyear, usernameError , panel, start ,goBack, succefullReg);
+			
 
-		}else {
+		}else { //show erros
+
+		
 
 			print ("invalid player");
 

@@ -130,3 +130,7 @@
 /Users/fidelhemandez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/UnityEditor.iOS.Extensions.Common.dll.mdb
 /Users/fidelhemandez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/Assembly-CSharp.dll.mdb
 /Users/fidelhemandez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/Assembly-CSharp.dll
+/Users/samiratellez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/GameSparks.Api.dll
+/Users/samiratellez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/GameSparksRT.dll
+/Users/samiratellez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/GameSparks.dll
+/Users/samiratellez/Documents/GitHub/Gaming-for-CS-Education/csGaming/Temp/bin/Debug/BouncyCastle_GameSparks.dll
