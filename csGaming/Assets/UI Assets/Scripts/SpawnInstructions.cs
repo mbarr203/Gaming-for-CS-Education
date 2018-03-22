@@ -9,15 +9,19 @@ public class SpawnInstructions : MonoBehaviour {
 	public Button moveLeft;
 	public Button moveUp;
 	public Button moveDown;
+	public GameObject commandPrefab; 
+	public string text; 
 
-	public Canvas background;
-	public Button[] buttons;
+	//public Canvas background;
+	//public Button commands;
+	//public Button[] removeButtons;
+	//public Button[] editButtons;
 
 	void Start()
 	{
 		Debug.Log ("You have started");
 
-		//Button moveRightButton = moveRight.GetComponent<Button>();
+		Button moveRightButton = moveRight.GetComponent<Button>();
 		moveRight.onClick.AddListener(MoveRight);
 
 		Button moveLeftButton = moveLeft.GetComponent<Button>();
@@ -29,15 +33,6 @@ public class SpawnInstructions : MonoBehaviour {
 		Button moveDownButton = moveDown.GetComponent<Button>();
 		moveDownButton.onClick.AddListener(MoveDown);
 
-		//Disable all command buttons at the beginning of scene 
-		int i = 0;
-		while (i < buttons.Length) 
-		{
-			buttons [i].gameObject.SetActive (false);
-			i++;
-		}
-			
-
 	}
 
 	void Update()
@@ -45,80 +40,84 @@ public class SpawnInstructions : MonoBehaviour {
 		
 	}
 
-	 void MoveRight()
+	 public void MoveRight()
 	{
 		Debug.Log ("You have clicked the move right button");
-		int i = 0;
-		while (i < buttons.Length) 
-		{
-			if (buttons [i].GetComponentInChildren<Text> ().text.Equals ("")) 
-			{
-				buttons[i].gameObject.SetActive (true);
-				buttons[i].GetComponentInChildren<Text> ().text = "Player.MoveRight()";
-				break;
-			}
-				i++;
-			Debug.Log ("You have clicked the move right button");
+	
+		//text field will only be empty at the beginning of the game, after the first
+		//command has been printed, text field will be populated and mark that the first
+		//command button's text has been filled
+		if (text.Equals ("")) {
+			Debug.Log ("Empty");
+			commandPrefab.GetComponent<CommandListCommand> ().SetText ("Player.MoveRight()");
+			text = "Not empty";
+		} else {
+			GameObject command = Instantiate (commandPrefab) as GameObject;
+			commandPrefab.SetActive (true);
+			command.GetComponent<CommandListCommand> ().SetText ("Player.MoveRight()");
+			command.transform.SetParent (commandPrefab.transform.parent, false);
 		}
-
-
-		/*GameObject newBtn;
-
-		newBtn = Instantiate (btnPrefab, transform.position , transform.rotation) as GameObject;
-		newBtn.transform.position = new Vector3 (743f,283f , 0);
-		newBtn.transform.rotation = btnPrefab.transform.localRotation;
-		//transform.localPosition = Camera.main.ViewportToWorldPoint(pos);
-		newBtn.transform.SetParent(background.transform, false);
-
-		Debug.Log("The position is" + newBtn.transform.localPosition.ToString());*/
-
 	}
+
 
 	public void MoveLeft()
 	{
-		int i = 0;
-		while (i < buttons.Length) 
-		{
-			if (buttons [i].GetComponentInChildren<Text> ().text.Equals ("")) 
-			{
-				buttons[i].gameObject.SetActive (true);
-				buttons [i].GetComponentInChildren<Text> ().text = "Player.MoveLeft()";
-				break;
-			}
-			i++;
+		Debug.Log ("You have clicked the move left button");
+		//text field will only be empty at the beginning of the game, after the first
+		//command has been printed, text field will be populated and mark that the first
+		//command button's text has been filled
+		if (text.Equals ("")) {
+			Debug.Log ("Empty");
+			commandPrefab.GetComponent<CommandListCommand> ().SetText ("Player.MoveLeft()");
+			text = "Not empty";
+		} else {
+			GameObject command = Instantiate (commandPrefab) as GameObject;
+			commandPrefab.SetActive (true);
+			command.GetComponent<CommandListCommand> ().SetText ("Player.MoveLeft()");
+			command.transform.SetParent (commandPrefab.transform.parent, false);
 		}
+
 	}
 
 	public void MoveUp()
 	{
-		int i = 0;
-		while (i < buttons.Length) 
-		{
-			if (buttons [i].GetComponentInChildren<Text> ().text.Equals ("")) 
-			{
-				buttons[i].gameObject.SetActive (true);
-				buttons [i].GetComponentInChildren<Text> ().text = "Player.MoveUp()";
-				break;
-			}
-			i++;
+		Debug.Log ("You have clicked the move up button");
+		//text field will only be empty at the beginning of the game, after the first
+		//command has been printed, text field will be populated and mark that the first
+		//command button's text has been filled
+		if (text.Equals ("")) {
+			Debug.Log ("Empty");
+			commandPrefab.GetComponent<CommandListCommand> ().SetText ("Player.MoveUp()");
+			text = "Not empty";
+		} else {
+			GameObject command = Instantiate (commandPrefab) as GameObject;
+			commandPrefab.SetActive (true);
+			command.GetComponent<CommandListCommand> ().SetText ("Player.MoveUp()");
+			command.transform.SetParent (commandPrefab.transform.parent, false);
 		}
 	}
 
 	void MoveDown()
 	{
-		int i = 0;
-		while (i < buttons.Length) 
-		{
-			if (buttons [i].GetComponentInChildren<Text> ().text.Equals ("")) 
-			{
-				buttons[i].gameObject.SetActive (true);
-				buttons [i].GetComponentInChildren<Text> ().text = "Player.MoveDown()";
-				break;
-			}
-			i++;
+		Debug.Log ("You have clicked the move down button");
+		//text field will only be empty at the beginning of the game, after the first
+		//command has been printed, text field will be populated and mark that the first
+		//command button's text has been filled
+		if (text.Equals ("")) {
+			Debug.Log ("Empty");
+			commandPrefab.GetComponent<CommandListCommand> ().SetText ("Player.MoveDown()");
+			text = "Not empty";
+		} else {
+			GameObject command = Instantiate (commandPrefab) as GameObject;
+			commandPrefab.SetActive (true);
+			command.GetComponent<CommandListCommand> ().SetText ("Player.MoveDown()");
+			command.transform.SetParent (commandPrefab.transform.parent, false);
 		}
 	}
 
-
+	public void removeCommand()
+	{
+		
+	}
 
 }
